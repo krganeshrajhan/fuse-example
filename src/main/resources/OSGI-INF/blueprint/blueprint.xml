@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+       http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+       http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+
+	<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+		<property name="brokerURL" value="vm://localhost" />
+	</bean>
+
+	<camelContext xmlns="http://camel.apache.org/schema/blueprint">
+  <route id="demoRoute">
+    <from uri="file://data/datafile"/>
+    <choice>
+      <when>
+        <xpath>/CustInfo[@infotype='LoanCustomer']</xpath>
+        <log message="Got Customer file with name ${file:name}"/>
+        <unmarshal>
+          <jaxb contextPath="fuse.example.homeloan.model" prettyPrint="true" mustBeJAXBElement="false" partClass="fuse.example.homeloan.model.CustInfo"/>
+        </unmarshal>
+        <log message="Customer info is National ID : ${body.nationalID} \n FirstName : ${body.firstName}\n LastName : ${body.lastName} \n Age : ${body.age} \n Occupation : ${body.occupation}"/>
+        <to uri="activemq:queue:customer"/>
+      </when>
+      <otherwise>
+        <log message="Got House file with name ${file:name}"/>
+        <unmarshal>
+          <jaxb contextPath="fuse.example.homeloan.model" prettyPrint="true" partClass="fuse.example.homeloan.model.HouseInfo"/>
+        </unmarshal>
+        <log message="House info is ${body}"/>
+        <bean method="quote" beanType="fuse.example.homeloan.processor.AppraisalProcessor"/>
+        <log message="House info is ${body}"/>
+        <to uri="activemq:queue:house"/>
+      </otherwise>
+    </choice>
+  </route>
+</camelContext>
+
+</blueprint>
