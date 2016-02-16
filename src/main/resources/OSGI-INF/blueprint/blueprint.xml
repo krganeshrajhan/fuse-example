@@ -17,7 +17,7 @@
         <xpath>/CustInfo[@infotype='LoanCustomer']</xpath>
         <log message="Got Customer file with name ${file:name}"/>
         <unmarshal>
-          <jaxb contextPath="fuse.example.homeloan.model" prettyPrint="true" mustBeJAXBElement="false" partClass="fuse.example.homeloan.model.CustInfo"/>
+          <jaxb contextPath="fuse.example.homeloan.model" prettyPrint="true" partClass="fuse.example.homeloan.model.CustInfo"/>
         </unmarshal>
         <log message="Customer info is National ID : ${body.nationalID} \n FirstName : ${body.firstName}\n LastName : ${body.lastName} \n Age : ${body.age} \n Occupation : ${body.occupation}"/>
         <to uri="activemq:queue:customer"/>
