@@ -9,10 +9,163 @@
 	<packaging>bundle</packaging>
 	<name>Camel Blueprint Route</name>
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<ojdbc6.version>11.2.0.1.0</ojdbc6.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<org.apache.camel.version>2.12.0.redhat-610379</org.apache.camel.version>
+		<org.apache.activemq.version>5.9.0.redhat-610379</org.apache.activemq.version>
+		<org.slf4j.version>1.7.5</org.slf4j.version>
+		<org.apache.cxf.version>2.7.0.redhat-610379</org.apache.cxf.version>
 	</properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.ow2.asm</groupId>
+            <artifactId>asm-all</artifactId>
+            <version>4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+            <version>${org.apache.camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-blueprint</artifactId>
+            <version>${org.apache.camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jaxb</artifactId>
+            <version>${org.apache.camel.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-sql</artifactId>
+            <version>${org.apache.camel.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-http4</artifactId>
+            <version>${org.apache.camel.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jackson</artifactId>
+            <version>${org.apache.camel.version}</version>
+        </dependency>
+
+        <!-- For Restful Web Service with CXF -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-cxf</artifactId>
+            <version>${org.apache.camel.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+            <version>${org.apache.cxf.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http-jetty</artifactId>
+            <version>${org.apache.cxf.version}</version>
+        </dependency>
+
+        <!--For DataSource Setting-->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+        </dependency>
+
+        <!-- ORACLE database driver -->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>${ojdbc6.version}</version>
+        </dependency>
+
+
+        <!-- the ActiveMQ client with connection pooling -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-client</artifactId>
+            <version>${org.apache.activemq.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-camel</artifactId>
+            <version>${org.apache.activemq.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-pool</artifactId>
+            <version>${org.apache.activemq.version}</version>
+        </dependency>
+
+
+        <!-- the ActiveMQ broker is optional and can be removed if connecting to a remote broker only -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-broker</artifactId>
+            <version>${org.apache.activemq.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-spring</artifactId>
+            <version>${org.apache.activemq.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-kahadb-store</artifactId>
+            <version>${org.apache.activemq.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xbean</groupId>
+            <artifactId>xbean-spring</artifactId>
+            <version>3.15</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>3.2.8.RELEASE</version>
+        </dependency>
+
+        <!-- logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${org.slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${org.slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${org.slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+
+        <!-- testing -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-blueprint</artifactId>
+            <version>${org.apache.camel.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 	<repositories>
 		<repository>
@@ -85,134 +238,6 @@
 			</releases>
 		</pluginRepository>
 	</pluginRepositories>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-core</artifactId>
-			<version>2.12.0.redhat-610379</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-blueprint</artifactId>
-			<version>2.12.0.redhat-610379</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jaxb</artifactId>
-			<version>2.12.0.redhat-610379</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-sql</artifactId>
-			<version>2.12.0.redhat-610379</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-http4</artifactId>
-			<version>2.12.0.redhat-610379</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jackson</artifactId>
-			<version>2.12.0.redhat-610379</version>
-		</dependency>
-
-		<!--For DataSource Setting -->
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
-		</dependency>
-
-		<!-- ORACLE database driver -->
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <version>${ojdbc6.version}</version>
-        </dependency>
-
-
-		<!-- the ActiveMQ client with connection pooling -->
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-client</artifactId>
-			<version>5.9.0.redhat-610379</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-camel</artifactId>
-			<version>5.9.0.redhat-610379</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-pool</artifactId>
-			<version>5.9.0.redhat-610379</version>
-		</dependency>
-
-
-		<!-- the ActiveMQ broker is optional and can be removed if connecting to 
-			a remote broker only -->
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-broker</artifactId>
-			<version>5.9.0.redhat-610379</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-spring</artifactId>
-			<version>5.9.0.redhat-610379</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-kahadb-store</artifactId>
-			<version>5.9.0.redhat-610379</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.xbean</groupId>
-			<artifactId>xbean-spring</artifactId>
-			<version>3.15</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>3.2.8.RELEASE</version>
-		</dependency>
-
-		<!-- logging -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.5</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.5</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>1.7.5</version>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
-
-		<!-- testing -->
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-test-blueprint</artifactId>
-			<version>2.12.0.redhat-610379</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
 	<build>
 		<defaultGoal>install</defaultGoal>
 
@@ -222,8 +247,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.5.1</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -244,7 +269,7 @@
 				<configuration>
 					<instructions>
 						<Bundle-SymbolicName>homeloan</Bundle-SymbolicName>
-						<Private-Package>org.blogdemo.homeloan.*</Private-Package>
+						<Private-Package>fuse.example.homeloan.*</Private-Package>
 						<Import-Package>*</Import-Package>
 					</instructions>
 				</configuration>
@@ -254,7 +279,7 @@
 			<plugin>
 				<groupId>org.apache.camel</groupId>
 				<artifactId>camel-maven-plugin</artifactId>
-				<version>2.12.0.redhat-610379</version>
+				<version>${org.apache.camel.version}</version>
 				<configuration>
 					<useBlueprint>true</useBlueprint>
 				</configuration>
