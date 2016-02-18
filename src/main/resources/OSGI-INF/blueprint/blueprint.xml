@@ -5,13 +5,18 @@
        http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
        http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
 
-	<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+	<!-- <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
 		<property name="brokerURL" value="vm://localhost" />
+	</bean> -->
+	<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+		<property name="brokerURL" value="tcp://localhost:61616" />
+		<property name="userName" value="admin"/>
+		<property name="password" value="admin"/>
 	</bean>
 
 	<camelContext xmlns="http://camel.apache.org/schema/blueprint">
   <route id="demoRoute">
-    <from uri="file://data/datafile"/>
+    <from uri="file:///Users/krganeshrajhan/Workspace/jboss-fuse/fuse-example/data/datafile"/>
     <choice>
       <when>
         <xpath>/CustInfo[@infotype='LoanCustomer']</xpath>
