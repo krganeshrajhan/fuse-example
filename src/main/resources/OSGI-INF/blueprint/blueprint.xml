@@ -14,8 +14,9 @@
 		<property name="password" value="admin"/>
 	</bean>
 
-	<camelContext xmlns="http://camel.apache.org/schema/blueprint">
+	<camelContext id="DemoContext" xmlns="http://camel.apache.org/schema/blueprint">
   <route id="demoRoute">
+  <!-- <from uri="file://data/datafile"/> -->
     <from uri="file:///Users/krganeshrajhan/Workspace/jboss-fuse/fuse-example/data/datafile"/>
     <choice>
       <when>

@@ -20,7 +20,7 @@
 		<!-- fabric8 -->
         <fabric8.parentProfiles>feature-camel</fabric8.parentProfiles>
         <fabric8.profile>fuse-example</fabric8.profile>
-        <fabric8.features>camel-cxf camel-http4 camel-jaxb camel-sql camel-jackson camel-jms activemq-camel</fabric8.features>
+        <fabric8.features>camel-jms activemq-camel camel-jaxb camel-cxf camel-http4 camel-sql camel-jackson</fabric8.features>
 		<fabric8.bundles>wrap:mvn:com.oracle/ojdbc6/11.2.0.1.0 mvn:commons-dbcp/commons-dbcp/1.4</fabric8.bundles>
 		<fabric8.featureRepos>mvn:org.apache.camel.karaf/apache-camel/${version:camel}/xml/features</fabric8.featureRepos>
 	</properties>
@@ -95,37 +95,44 @@
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>
             <version>${ojdbc6.version}</version>
+            <scope>system</scope>
+    		<systemPath>${project.basedir}/src/main/resources/lib/ojdbc6.jar</systemPath>
         </dependency>
+        <dependency>
+		  <groupId>oracle</groupId>
+		  <artifactId>orai18n</artifactId>
+		  <version>10.2.0.3.0</version>
+		</dependency>
 
         <!-- the ActiveMQ client with connection pooling -->
-        <dependency>
+        <!-- <dependency>
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-client</artifactId>
             <version>${org.apache.activemq.version}</version>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-camel</artifactId>
             <version>${org.apache.activemq.version}</version>
         </dependency>
-        <dependency>
+        <!-- <dependency>
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-pool</artifactId>
             <version>${org.apache.activemq.version}</version>
-        </dependency>
+        </dependency> -->
 
 
         <!-- the ActiveMQ broker is optional and can be removed if connecting to a remote broker only -->
-        <dependency>
+        <!-- <dependency>
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-broker</artifactId>
             <version>${org.apache.activemq.version}</version>
-        </dependency>
-        <dependency>
+        </dependency> -->
+        <!-- <dependency>
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-spring</artifactId>
             <version>${org.apache.activemq.version}</version>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-kahadb-store</artifactId>
@@ -207,6 +214,10 @@
 				<enabled>false</enabled>
 			</releases>
 		</repository>
+		<repository>
+		    <id>pentaho-releases</id>
+		    <url>http://repository.pentaho.org/artifactory/repo/</url>
+		  </repository>
 	</repositories>
 
 	<pluginRepositories>
@@ -274,9 +285,10 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-						<Bundle-SymbolicName>homeloan</Bundle-SymbolicName>
+						<Bundle-SymbolicName>fuse-example</Bundle-SymbolicName>
 						<Private-Package>fuse.example.homeloan.*</Private-Package>
-						<Import-Package>oracle,*</Import-Package>
+						<Export-Package>oracle</Export-Package>
+						<Import-Package>*</Import-Package>
 					</instructions>
 				</configuration>
 			</plugin>
